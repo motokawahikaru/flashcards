@@ -9,9 +9,9 @@
       <ul class="navbar-nav mr-auto"></ul>
       <ul class="navbar-nav">
         <% if logged_in? %>
-          <li class="nav-item"><a href="#" class="nav-link">デッキ一覧</a></li>
+          <li class="nav-item"><%= link_to "デッキ一覧", decks_path, class: "nav-link" %></li>
           <li class="nav-item"><a href="#" class="nav-link">カード一覧</a></li>
-          <li class="nav-item"><a href="#" class="nav-link">デッキ追加</a></li>
+          <li class="nav-item"><%= link_to "デッキ追加", new_deck_path, class: "nav-link" %></li>
           <li class="nav-item"><a href="#" class="nav-link">カード追加</a></li>
           <li class="nav-item"><%= link_to "マイページ", user_path(current_user), class: "nav-link" %></li>
           <li class="nav-item"><%= link_to "ログアウト", logout_path, method: :delete, class: "nav-link" %></li>

@@ -1,0 +1,25 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>デッキ名</th>
+      <th>カード数</th>
+      <th>詳細</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @decks.each do |deck| %>
+      <tr>
+        <td>
+          <%= link_to deck.name, deck %>
+        </td>
+        <td>
+          cardnumber
+        </td>
+        <td>
+          <%= link_to "詳細", deck_path(deck), class: "btn" %>
+        </td>
+      <tr>
+    <% end %>
+  </tbody>
+  <%= paginate @decks %>
+</table>

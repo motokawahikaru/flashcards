@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <%= @deck.name %>
+    </div>
+    <div class="col-sm-6">
+      cardnumber
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= link_to "このデッキを編集する", edit_deck_path %>
+    </div>
+    <div class="col-sm-6">
+      <%= link_to "このデッキを削除する", @deck, method: :delete, data: { confirm: "本当に削除してよろしいですか？"} %>
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>問題</th>
+      <th>解答</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+</table>
