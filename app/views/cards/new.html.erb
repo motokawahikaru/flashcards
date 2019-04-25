@@ -1,0 +1,23 @@
+<div class="text-center">
+  <h1>カード追加</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    
+    <%= form_with(model: @card, url: deck_cards_path, local: true) do |f| %>
+      <div class="form-group">
+        <%= f.label :question, "問題" %>
+        <%= f.text_field :question, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :answer, "解答" %>
+        <%= f.text_field :answer, class: "form-control" %>
+      </div>
+      
+      <%= f.submit "追加", class: "btn btn-primary btn-block" %>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to "デッキ一覧に戻る", deck_path(@deck) %>

@@ -8,11 +8,14 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <%= link_to "このデッキを編集する", edit_deck_path %>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <%= link_to "このデッキを削除する", @deck, method: :delete, data: { confirm: "本当に削除してよろしいですか？"} %>
+    </div>
+    <div class="col-sm-4">
+      <%= link_to "カードを追加する", new_deck_card_path(params[:id]) %>
     </div>
   </div>
 </div>
@@ -26,4 +29,23 @@
       <th>削除</th>
     </tr>
   </thead>
+  <tbody>
+    <% @cards.each do |card| %>
+      <tr>
+        <td>
+          <%= card.question %>
+        </td>
+        <td>
+          <%= card.answer %>
+        </td>
+        <td>
+          <%= link_to "編集", edit_deck_card_path(@deck, card) %>
+        </td>
+        <td>
+          <%= link_to "削除", deck_card_path(@deck, card), method: :delete %>
+        </td>
+      <tr>
+    <% end %>
+  </tbody>
+  <%= paginate @cards %>
 </table>

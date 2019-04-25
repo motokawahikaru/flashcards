@@ -9,5 +9,10 @@ class ApplicationController < ActionController::Base
   
   def counts(user)
     @count_decks = user.decks.count
+    #@count_all_cards = current_user.deck.cards.count
   end
+  
+  #def counts(deck)
+    #@count_cards = deck.cards.count
+  #end
 end

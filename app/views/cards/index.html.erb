@@ -1,0 +1,33 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>デッキ</th>
+      <th>問題</th>
+      <th>解答</th>
+      <th>編集</th>
+      <th>削除</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cards.each do |card| %>
+      <tr>
+        <td>
+          <%= link_to card.deck.name, deck %>
+        </td>
+        <td>
+          <%= card.question %>
+        </td>
+        <td>
+          <%= card.answer %>
+        </td>
+        <td>
+          <%= link_to "編集", edit_deck_card_path, class: "btn" %>
+        </td>
+        <td>
+          <%= link_to "削除", @card, method: :delete, class: "btn" %>
+        </td>
+      <tr>
+    <% end %>
+  </tbody>
+  <%= paginate @decks %>
+</table>

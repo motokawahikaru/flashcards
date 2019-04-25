@@ -3,7 +3,11 @@ class DecksController < ApplicationController
   before_action :set_deck, only: [:edit, :show, :update, :destroy]
   
   def index
-    @decks = current_user.decks.order(id: :desc).page(params[:page])
+    if logged_in?
+      @decks = current_user.decks.order(id: :desc).page(params[:page])
+    else
+      redirect_to login_url
+    end
   end
   
   def create
@@ -25,6 +29,7 @@ class DecksController < ApplicationController
   end
   
   def show
+    @cards = @deck.cards.order(id: :desc).page(params[:page])
   end
   
   def update
