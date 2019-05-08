@@ -3,33 +3,34 @@ class CardsController < ApplicationController
   before_action :set_card, only: [:edit, :update, :destroy]
   
   def index
-    @cards = current_user.deck.cards.order(id: :desc).page(params[:page])
+    @cards = current_user.cards.order(id: :desc).page(params[:page])
+    user_counts(current_user)
   end
   
   def new
-    @card = current_deck.cards.build
-    @deck = current_deck
+    @card = current_user.cards.build
+    @decks = current_user.decks
   end
   
   def create
-    @card = current_deck.cards.build(card_params)
+    @card = current_user.cards.build(card_params)
     if @card.save
       flash[:success] = "カードを追加しました"
-      redirect_to new_deck_card_url
+      redirect_to new_card_url
     else
       flash[:danger] = "カードの追加に失敗しました"
-      redirect_back(fallback_location: root_path)
+      render "new"
     end
   end
   
   def edit
-    @deck = current_deck
+    @decks = current_user.decks
   end
   
   def update
     if @card.update(card_params)
       flash[:success] = "カードを更新しました"
-      redirect_to current_deck
+      redirect_to cards_url
     else
       flash[:danger] = "カードの更新に失敗しました"
       render "edit"
@@ -44,12 +45,8 @@ class CardsController < ApplicationController
   
   private
   
-  def current_deck
-    @deck = Deck.find(params[:deck_id])
-  end
-  
   def card_params
-    params.require(:card).permit(:question, :answer)
+    params.require(:card).permit(:question, :answer, :deck_id)
   end
   
   def set_card

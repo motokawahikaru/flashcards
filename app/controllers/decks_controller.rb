@@ -3,6 +3,7 @@ class DecksController < ApplicationController
   before_action :set_deck, only: [:edit, :show, :update, :destroy]
   
   def index
+    user_counts(current_user)
     if logged_in?
       @decks = current_user.decks.order(id: :desc).page(params[:page])
     else
@@ -30,6 +31,7 @@ class DecksController < ApplicationController
   
   def show
     @cards = @deck.cards.order(id: :desc).page(params[:page])
+    deck_counts(@deck)
   end
   
   def update
@@ -46,6 +48,10 @@ class DecksController < ApplicationController
     @deck.destroy
     flash[:success] = "デッキを削除しました"
     redirect_to decks_url
+  end
+  
+  def question
+    @cards = @deck.cards.shuffle
   end
   
   private

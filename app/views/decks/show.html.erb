@@ -4,18 +4,15 @@
       <%= @deck.name %>
     </div>
     <div class="col-sm-6">
-      cardnumber
+      カード数: <%= @count_cards %>
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-4">
-      <%= link_to "このデッキを編集する", edit_deck_path %>
+    <div class="col-sm-6">
+      <%= link_to "このデッキを編集する", edit_deck_path, class: "btn btn-outline-info", method: :get %>
     </div>
-    <div class="col-sm-4">
-      <%= link_to "このデッキを削除する", @deck, method: :delete, data: { confirm: "本当に削除してよろしいですか？"} %>
-    </div>
-    <div class="col-sm-4">
-      <%= link_to "カードを追加する", new_deck_card_path(params[:id]) %>
+    <div class="col-sm-6">
+      <%= link_to "このデッキを削除する", @deck, class: "btn btn-outline-danger", method: :delete, data: { confirm: "本当に削除してよろしいですか？"} %>
     </div>
   </div>
 </div>
@@ -39,10 +36,10 @@
           <%= card.answer %>
         </td>
         <td>
-          <%= link_to "編集", edit_deck_card_path(@deck, card) %>
+          <%= link_to "編集", edit_card_path(card), class: "btn btn-info btn-sm", method: :get %>
         </td>
         <td>
-          <%= link_to "削除", deck_card_path(@deck, card), method: :delete %>
+          <%= link_to "削除", card_path(card), class: "btn btn-danger btn-sm", method: :delete, data: { confirm: "本当に削除してよろしいですか？"} %>
         </td>
       <tr>
     <% end %>

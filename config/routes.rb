@@ -9,8 +9,10 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :new, :create]
   
   resources :decks do
-    resources :cards, only: [:new, :create, :edit, :update, :destroy]
+    get 'question/:id', to: 'questions#show'
+    get 'answer/:id', to: 'questions#answer'
+    delete "questions", to: "questions#destroy"
+    resources :questions, only: [:create]
   end
-  
-  resources :cards, only: [:index]
+  resources :cards, except: :show
 end

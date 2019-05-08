@@ -6,5 +6,6 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   
-  has_many :decks
+  has_many :decks, dependent: :destroy
+  has_many :cards, dependent: :destroy
 end

@@ -2,21 +2,23 @@
   <h1>マイページ</h1>  
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4 offset-sm-2 text-left">ユーザー名</div>
-    <div class="col-sm-4 text-center"><%= @user.name %></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4 offset-sm-2 text-left">Eメール</div>
-    <div class="col-sm-4 text-center"><%= @user.email %></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4 offset-sm-2 text-left">デッキ数</div>
-    <div class="col-sm-4 text-center">decknumber<%#= %></div>
-  </div>
-  <div class="row">
-    <div class="col-sm-4 offset-sm-2 text-left">カード数</div>
-    <div class="col-sm-4 text-center">cardnumber<%#= %></div>
-  </div>
-</div>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <td class="text-center">ユーザー名</td>
+      <td class="text-center"><%= @user.name %></td>
+    </tr>
+    <tr>
+      <td class="text-center">Eメール</td>
+      <td class="text-center"><%= @user.email %></div>
+    </tr>
+    <tr>
+      <td class="text-center">デッキ数</td>
+      <td class="text-center"><%= @count_decks %></td>
+    </tr>
+    <tr>
+      <td class="text-center">カード数</td>
+      <td class="text-center"><%= @count_all_cards %></td>
+    </tr>    
+  </tbody>
+</table>

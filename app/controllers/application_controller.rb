@@ -7,12 +7,16 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def counts(user)
+  def user_counts(user)
     @count_decks = user.decks.count
-    #@count_all_cards = current_user.deck.cards.count
+    @count_all_cards = user.cards.count
   end
   
-  #def counts(deck)
-    #@count_cards = deck.cards.count
-  #end
+  def deck_counts(deck)
+    @count_cards = deck.cards.count
+  end
+  
+  def current_deck
+    @deck = Deck.find(params[:deck_id])
+  end
 end

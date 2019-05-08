@@ -1,29 +1,38 @@
-<% if logged_in? %>
-  <table class="table">
-    <thead>
+<div class="container">
+  <div class="row">
+    <div class="text-left col-sm-6">
+      デッキ名クリックで出題開始
+    </div>
+    <div class="text-right col-sm-6">
+      デッキ数: <%= @count_decks %>
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th class="text-center">デッキ名</th>
+      <th class="text-center">カード数</th>
+      <th class="text-center">詳細</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @decks.each do |deck| %>
       <tr>
-        <th>デッキ名</th>
-        <th>カード数</th>
-        <th>詳細</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @decks.each do |deck| %>
-        <tr>
-          <td>
-            <%= link_to deck.name, deck %>
-          </td>
-          <td>
-            cardnumber
-          </td>
-          <td>
-            <%= link_to "詳細", deck_path(deck), class: "btn" %>
-          </td>
-        <tr>
-      <% end %>
-    </tbody>
-    <%= paginate @decks %>
-  </table>
-<% else %>
-  
+        <td class="text-center">
+          <%= link_to deck.name, deck_questions_path(deck), class: "btn btn-outline-primary btn-block", method: :post %>
+        </td>
+        <td class="text-center">
+          <%= deck.cards.count %>
+        </td>
+        <td class="text-center">
+          <%= link_to "詳細", deck, class: "btn btn-info btn-sm", method: :get %>
+        </td>
+      <tr>
+    <% end %>
+  </tbody>
+  <%= paginate @decks %>
+</table>
+
 

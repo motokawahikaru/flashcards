@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_25_000854) do
+ActiveRecord::Schema.define(version: 2019_05_07_014100) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "deck_id"
@@ -18,7 +18,9 @@ ActiveRecord::Schema.define(version: 2019_04_25_000854) do
     t.string "answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["deck_id"], name: "index_cards_on_deck_id"
+    t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
   create_table "decks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -27,6 +29,14 @@ ActiveRecord::Schema.define(version: 2019_04_25_000854) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_decks_on_user_id"
+  end
+
+  create_table "questions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "card_id"
+    t.boolean "result", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_questions_on_card_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -38,5 +48,7 @@ ActiveRecord::Schema.define(version: 2019_04_25_000854) do
   end
 
   add_foreign_key "cards", "decks"
+  add_foreign_key "cards", "users"
   add_foreign_key "decks", "users"
+  add_foreign_key "questions", "cards"
 end

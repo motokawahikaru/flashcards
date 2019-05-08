@@ -1,3 +1,7 @@
+<div class="text-right">
+  カード数: <%= @count_all_cards %>
+</div>
+
 <table class="table">
   <thead>
     <tr>
@@ -12,7 +16,7 @@
     <% @cards.each do |card| %>
       <tr>
         <td>
-          <%= link_to card.deck.name, deck %>
+          <%= link_to card.deck.name, card.deck, class: "btn btn-outline-primary", method: :get %>
         </td>
         <td>
           <%= card.question %>
@@ -21,13 +25,13 @@
           <%= card.answer %>
         </td>
         <td>
-          <%= link_to "編集", edit_deck_card_path, class: "btn" %>
+          <%= link_to "編集", edit_card_path(card), class: "btn btn-info btn-sm", method: :get %>
         </td>
         <td>
-          <%= link_to "削除", @card, method: :delete, class: "btn" %>
+          <%= link_to "削除", card, class: "btn btn-danger btn-sm", method: :delete, data: { confirm: "本当に削除してよろしいですか？"} %>
         </td>
       <tr>
     <% end %>
   </tbody>
-  <%= paginate @decks %>
+  <%= paginate @cards %>
 </table>
