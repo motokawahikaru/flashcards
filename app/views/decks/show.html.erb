@@ -12,7 +12,7 @@
       <%= link_to "このデッキを編集する", edit_deck_path, class: "btn btn-outline-info", method: :get %>
     </div>
     <div class="col-sm-6">
-      <%= link_to "このデッキを削除する", @deck, class: "btn btn-outline-danger", method: :delete, data: { confirm: "本当に削除してよろしいですか？"} %>
+      <%= link_to "このデッキを削除する", @deck, class: "btn btn-outline-danger", method: :delete, data: { confirm: "デッキ内のカードもすべて削除されますが本当に削除してよろしいですか？"} %>
     </div>
   </div>
 </div>
