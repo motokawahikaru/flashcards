@@ -3,7 +3,8 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :answer]
   
   def create
-    cards = Card.where(id: @deck.cards.pluck(:id).shuffle!)
+    shuffled_cards = @deck.cards.pluck(:id).shuffle!
+    cards = Card.where(id: shuffled_cards).order(['field(id, ?)', shuffled_cards])
     if cards == []
       redirect_back(fallback_location: root_path)
       flash[:danger] = "デッキにカードが登録されていません"
