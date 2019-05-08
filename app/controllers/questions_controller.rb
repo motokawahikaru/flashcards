@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   
   def create
     shuffled_cards = @deck.cards.pluck(:id).shuffle!
-    cards = Card.where(id: shuffled_cards).order(['field(id, ?)', shuffled_cards])
+    cards = Card.where(id: shuffled_cards).order_as_specified(id: shuffled_cards)
     if cards == []
       redirect_back(fallback_location: root_path)
       flash[:danger] = "デッキにカードが登録されていません"

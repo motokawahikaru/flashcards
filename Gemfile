@@ -61,3 +61,4 @@ group :production do
 end
 
 gem 'pry-byebug', group: :development
+gem 'order_as_specified'
