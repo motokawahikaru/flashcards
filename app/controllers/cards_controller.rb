@@ -29,7 +29,6 @@ class CardsController < ApplicationController
   
   def edit
     @decks = current_user.decks
-    correct_card_user(@card)
   end
   
   def update
@@ -43,7 +42,6 @@ class CardsController < ApplicationController
   end
   
   def destroy
-    correct_card_user(@card)
     @card.destroy
     flash[:success] = "カードを削除しました"
     redirect_back(fallback_location: root_path)
