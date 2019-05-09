@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :answer]
   
   def create
+    Question.destroy_all
     shuffled_cards = @deck.cards.pluck(:id).shuffle!
     cards = Card.where(id: shuffled_cards).order_as_specified(id: shuffled_cards)
     if cards == []
@@ -45,5 +46,8 @@ class QuestionsController < ApplicationController
   def set_question
     @question = Question.find(params[:id])
     @q_num = @question.id - Question.first.id + 1
+    if @question.card.user != current_user
+      redirect_to root_url
+    end
   end
 end

@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
   before_action :require_user_logged_in
-  before_action :set_card, only: [:edit, :update, :destroy]
+  before_action :correct_card_user, only: [:edit, :update, :destroy]
   
   def index
     @cards = current_user.cards.order(id: :desc).page(params[:page])
@@ -8,8 +8,12 @@ class CardsController < ApplicationController
   end
   
   def new
-    @card = current_user.cards.build
     @decks = current_user.decks
+    if @decks == []
+      flash[:danger] = "カードを追加するにはデッキを1つ以上追加してください"
+      redirect_to root_url
+    end
+    @card = current_user.cards.build
   end
   
   def create
@@ -25,6 +29,7 @@ class CardsController < ApplicationController
   
   def edit
     @decks = current_user.decks
+    correct_card_user(@card)
   end
   
   def update
@@ -38,6 +43,7 @@ class CardsController < ApplicationController
   end
   
   def destroy
+    correct_card_user(@card)
     @card.destroy
     flash[:success] = "カードを削除しました"
     redirect_back(fallback_location: root_path)
@@ -47,9 +53,5 @@ class CardsController < ApplicationController
   
   def card_params
     params.require(:card).permit(:question, :answer, :deck_id)
-  end
-  
-  def set_card
-    @card = Card.find(params[:id])
   end
 end

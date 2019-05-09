@@ -1,6 +1,6 @@
 class DecksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :set_deck, only: [:edit, :show, :update, :destroy]
+  before_action :correct_deck_user, only: [:edit, :show, :update, :destroy]
   
   def index
     user_counts(current_user)
@@ -30,6 +30,7 @@ class DecksController < ApplicationController
   end
   
   def show
+    
     @cards = @deck.cards.order(id: :desc).page(params[:page])
     deck_counts(@deck)
   end
@@ -58,9 +59,5 @@ class DecksController < ApplicationController
   
   def deck_params
     params.require(:deck).permit(:name)
-  end
-  
-  def set_deck
-    @deck = Deck.find(params[:id])
   end
 end
