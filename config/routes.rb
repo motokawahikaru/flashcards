@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   
   get "signup", to: "users#new"
   resources :users, only: [:show, :new, :create]
+
+  resources :decks
   
-  resources :decks do
-    get 'question/:id', to: 'questions#show'
-    get 'answer/:id', to: 'questions#answer'
-    delete "questions", to: "questions#destroy"
-    resources :questions, only: [:create]
-  end
+  get 'question/:question_id/:id', to: 'questions#show'
+  get 'answer/:question_id/:id', to: 'questions#answer'
+  resources :questions, only: [:create, :destroy]
+
   resources :cards, except: :show
 end

@@ -37,6 +37,10 @@ class ApplicationController < ActionController::Base
     @count_cards = deck.cards.count
   end
   
+  def question_counts(question)
+    @count_questions = question.questions_lists.count
+  end
+  
   def current_deck
     @deck = Deck.find(params[:deck_id])
   end

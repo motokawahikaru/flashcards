@@ -21,7 +21,7 @@
     <% @decks.each do |deck| %>
       <tr>
         <td class="text-center">
-          <%= link_to deck.name, deck_questions_path(deck), class: "btn btn-outline-primary btn-block", method: :post %>
+          <%= link_to deck.name, questions_path(params: {deck_id: deck.id}), class: "btn btn-outline-primary btn-block", method: :post %>
         </td>
         <td class="text-center">
           <%= deck.cards.count %>
