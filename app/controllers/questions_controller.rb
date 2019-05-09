@@ -4,7 +4,11 @@ class QuestionsController < ApplicationController
   
   def create
     Question.where(user_id: current_user.id).destroy_all
-    question_first_id = Question.last.id + 1
+    
+    if Question.last != nil
+      question_first_id = Question.last.id + 1
+    end
+    
     shuffled_cards = @deck.cards.pluck(:id).shuffle!
     cards = Card.where(id: shuffled_cards).order_as_specified(id: shuffled_cards)
     if cards == []
