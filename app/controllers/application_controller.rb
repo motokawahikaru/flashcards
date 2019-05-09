@@ -20,6 +20,12 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
     end
   end
+  
+  def correct_question_user
+    if @question.user != current_user
+      redirect_to root_url
+    end
+  end
 
   def correct_user
     @user = User.find(params[:id])

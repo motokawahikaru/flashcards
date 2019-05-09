@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_deck, only: [:create]
   before_action :set_question, only: [:show, :answer]
+  before_action :correct_question_user, only: [:show, :answer]
   
   def create
     shuffled_cards = @deck.cards.pluck(:id).shuffle!

@@ -15,7 +15,11 @@
         <%= f.text_field :answer, class: "form-control" %>
       </div>
       
-      <%= f.submit "追加", class: "btn btn-primary btn-block" %>
+      <% if controller.action_name == 'new' %>
+        <%= f.submit "追加", class: "btn btn-primary btn-block" %>
+      <% elsif controller.action_name == 'edit' %>
+        <%= f.submit "更新", class: "btn btn-primary btn-block" %>
+      <% end %>
     <% end %>
   </div>
 </div>
