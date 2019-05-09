@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
   
   def create
     Question.where(user_id: current_user.id).destroy_all
+    question_first_id = Question.last.id + 1
     shuffled_cards = @deck.cards.pluck(:id).shuffle!
     cards = Card.where(id: shuffled_cards).order_as_specified(id: shuffled_cards)
     if cards == []
@@ -14,7 +15,7 @@ class QuestionsController < ApplicationController
         question = Question.new(card: card, user: current_user)
         question.save
       end
-      redirect_to action: "show", id: Question.first.id
+      redirect_to action: "show", id: question_first_id
     end
   end
 
