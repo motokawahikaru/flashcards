@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
         question.save
       end
       
-      if question_first_id = nil
+      if question_first_id == nil
         question_first_id = Question.first.id
       end
       
