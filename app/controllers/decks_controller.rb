@@ -17,7 +17,7 @@ class DecksController < ApplicationController
       flash[:success] = "デッキを作成しました"
       redirect_to decks_url
     else
-      flash[:danger] = "デッキの作成に失敗しました"
+      flash.now[:danger] = "デッキの作成に失敗しました"
       render "new"
     end
   end
@@ -40,7 +40,7 @@ class DecksController < ApplicationController
       flash[:success] = "デッキを更新しました"
       redirect_to decks_url
     else
-      flash[:danger] = "デッキの更新に失敗しました"
+      flash.now[:danger] = "デッキの更新に失敗しました"
       render "edit"
     end
   end

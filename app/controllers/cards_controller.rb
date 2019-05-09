@@ -22,7 +22,7 @@ class CardsController < ApplicationController
       flash[:success] = "カードを追加しました"
       redirect_to new_card_url
     else
-      flash[:danger] = "カードの追加に失敗しました"
+      flash.now[:danger] = "カードの追加に失敗しました"
       render "new"
     end
   end
@@ -36,7 +36,7 @@ class CardsController < ApplicationController
       redirect_to cards_url
     else
       @decks = current_user.decks
-      flash[:danger] = "カードの更新に失敗しました"
+      flash.now[:danger] = "カードの更新に失敗しました"
       render "edit"
     end
   end
