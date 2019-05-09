@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :answer]
   
   def create
-    Question.destroy_all
+    Question.where(user_id: current_user.id).destroy_all
     shuffled_cards = @deck.cards.pluck(:id).shuffle!
     cards = Card.where(id: shuffled_cards).order_as_specified(id: shuffled_cards)
     if cards == []
@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
       flash[:danger] = "デッキにカードが登録されていません"
     else
       cards.each do |card|
-        question = Question.new(card: card)
+        question = Question.new(card: card, user: current_user)
         question.save
       end
       redirect_to action: "show", id: Question.first.id
