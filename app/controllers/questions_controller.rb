@@ -19,6 +19,11 @@ class QuestionsController < ApplicationController
         question = Question.new(card: card, user: current_user)
         question.save
       end
+      
+      if question_first_id = nil
+        question_first_id = Question.first.id
+      end
+      
       redirect_to action: "show", id: question_first_id
     end
   end
