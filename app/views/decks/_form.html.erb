@@ -2,13 +2,14 @@
   <div class="col-sm-6 offset-sm-3">
     
     <%= form_with(model: deck, local: true) do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
       <div class="form-group">
         <%= f.label :name, "デッキ名" %>
         <%= f.text_field :name, class: "form-control" %>
       </div>
-      <% if controller.action_name == 'new' %>
+      <% if controller.action_name == 'new' or controller.action_name == 'create' %>
         <%= f.submit "追加", class: "btn btn-primary btn-block" %>
-      <% elsif controller.action_name == 'edit' %>
+      <% elsif controller.action_name == 'edit' or controller.action_name == 'update' %>
         <%= f.submit "更新", class: "btn btn-primary btn-block" %>
       <% end %>
     <% end %>

@@ -18,7 +18,7 @@ class DecksController < ApplicationController
       redirect_to decks_url
     else
       flash.now[:danger] = "デッキの作成に失敗しました"
-      render "new"
+      render 'new'
     end
   end
   
@@ -30,7 +30,6 @@ class DecksController < ApplicationController
   end
   
   def show
-    
     @cards = @deck.cards.order(id: :desc).page(params[:page])
     deck_counts(@deck)
   end

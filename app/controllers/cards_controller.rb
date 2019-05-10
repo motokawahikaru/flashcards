@@ -23,7 +23,7 @@ class CardsController < ApplicationController
       redirect_to new_card_url
     else
       flash.now[:danger] = "カードの追加に失敗しました"
-      render "new"
+      render :new
     end
   end
   
