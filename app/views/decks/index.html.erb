@@ -14,6 +14,7 @@
     <tr>
       <th class="text-center">デッキ名</th>
       <th class="text-center">カード数</th>
+      <th class="text-center">前回の正解率</th>
       <th class="text-center">詳細</th>
     </tr>
   </thead>
@@ -25,6 +26,11 @@
         </td>
         <td class="text-center">
           <%= deck.cards.count %>
+        </td>
+        <td class="text-center">
+          <% if deck.current_correct_rate %>
+            <%= deck.current_correct_rate %> %
+          <% end %>
         </td>
         <td class="text-center">
           <%= link_to "詳細", deck, class: "btn btn-info btn-sm", method: :get %>

@@ -56,4 +56,12 @@ class CardsController < ApplicationController
   def set_decks
     @decks = current_user.decks
   end
+  
+  def correct_card_user
+    @card = Card.find(params[:id])
+    if @card.user != current_user
+      redirect_to root_url
+    end
+  end
+
 end

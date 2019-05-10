@@ -6,26 +6,6 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
-  
-  def correct_card_user
-    @card = Card.find(params[:id])
-    if @card.user != current_user
-      redirect_to root_url
-    end
-  end
-  
-  def correct_deck_user
-    @deck = Deck.find(params[:id])
-    if @deck.user != current_user
-      redirect_to root_url
-    end
-  end
-  
-  def correct_question_user
-    if @question.user != current_user
-      redirect_to root_url
-    end
-  end
 
   def correct_user
     @user = User.find(params[:id])

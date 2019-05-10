@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   
   get 'question/:question_id/:id', to: 'questions#show'
   get 'answer/:question_id/:id', to: 'questions#answer'
+  post 'answer/:question_id/:id', to: 'questions#correct_count'
+  get '/questions/:id', to: 'questions#destroy'
   resources :questions, only: [:create, :destroy]
 
   resources :cards, except: :show

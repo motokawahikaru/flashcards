@@ -20,11 +20,7 @@
 <div class="text-center">
   <h2><%= @card.answer %></h2>
 </div>
-<div class="text-center">
-  <% next_id = params[:id].to_i + 1 %>
-  <% if @question.questions_lists.find_by(question_number: next_id) == nil %>
-    <%= link_to "終了", @question, method: :delete, class: "btn btn-primary" %>
-  <% else %>
-    <%= link_to "次の問題", url_for(action: :show, id: next_id), class: "btn btn-outline-primary" %>
-  <% end %>
+<div class="btn-group d-flex">
+  <%= link_to "正解", url_for(action: :correct_count, id: params[:id], correct: true), method: :post, class: "btn btn-success w-100" %>
+  <%= link_to "不正解", url_for(action: :correct_count, id: params[:id]), method: :post, class: "btn btn-danger w-100" %>
 </div>

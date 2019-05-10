@@ -59,4 +59,12 @@ class DecksController < ApplicationController
   def deck_params
     params.require(:deck).permit(:name)
   end
+
+  def correct_deck_user
+    @deck = Deck.find(params[:id])
+    if @deck.user != current_user
+      redirect_to root_url
+    end
+  end
+
 end
